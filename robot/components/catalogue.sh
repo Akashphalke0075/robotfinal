@@ -17,8 +17,8 @@ echo -n -e "\e[32m adding user roboshop \e[0m:"
 id $APPUSER
 if [ $? -ne 0 ] ; then
 useradd $APPUSER
-fi
 stat $?
+fi
 
 echo -n -e "\e[32m downloading components \e[0m:"
 curl -s -L -o /tmp/$COMPONENT.zip "https://github.com/stans-robot-project/${COMPONENT}/archive/main.zip"  &>> $LOGFILE
