@@ -22,16 +22,16 @@ systemctl start mongod &>> $LOGFILE
 stat $?
 
 echo -n -e "\e[32m downloading componenets \e[0m:"
-curl -s -L -o /tmp/mongodb.zip "https://github.com/stans-robot-project/mongodb/archive/main.zip"  &>> $LOGFILE
+curl -s -L -o /tmp/$COMPONENT.zip "https://github.com/stans-robot-project/${COMPONENT}/archive/main.zip"  &>> $LOGFILE
 stat $?
 
 echo -n -e "\e[32m unzipping componenets \e[0m:"
 cd /tmp
-unzip mongodb.zip &>> $LOGFILE
+unzip $COMPONENT.zip &>> $LOGFILE
 stat $?
 
 echo -n -e "\e[32m injecting schema \e[0m:"
-cd mongodb-main
+cd $COMPONENT-main
 mongo < catalogue.js  &>> $LOGFILE
 mongo < users.js  &>> $LOGFILE
 stat $?
