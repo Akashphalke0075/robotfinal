@@ -2,6 +2,7 @@
 
 set -e
 
+LOGFILE=/tmp/frotnend.log
 USERID=$(id -u)
 
 if [ $USERID -ne 0 ] ; then
@@ -18,11 +19,11 @@ fi
 }
 
 echo -n -e "\e[32m installing nginx \e[0m:"
-yum install nginx -y  &>> /tmp/frotnend.log
+yum install nginx -y  &>> $LOGFILE
 stat $?
 
 echo -n -e "\e[32m downloading component \e[0m:"
-curl -s -L -o /tmp/frontend.zip "https://github.com/stans-robot-project/frontend/archive/main.zip"  &>> /tmp/frotnend.log
+curl -s -L -o /tmp/frontend.zip "https://github.com/stans-robot-project/frontend/archive/main.zip"  &>> $LOGFILE
 stat $?
 
 echo -n -e "\e[32m cleaning up \e[0m:"
@@ -31,7 +32,7 @@ cd /usr/share/nginx/html
 stat $?
 
 echo -n -e "\e[32m unzipping component \e[0m:"
-unzip /tmp/frontend.zip &>> /tmp/frotnend.log
+unzip /tmp/frontend.zip &>> $LOGFILE
 stat $?
 
 echo -n -e "\e[32m moving the component \e[0m:"
@@ -41,7 +42,7 @@ stat $?
 
 echo -n -e "\e[32m cleaning and move confg \e[0m:"
 rm -rf frontend-main README.md
-mv localhost.conf /etc/nginx/default.d/roboshop.conf &>> /tmp/frotnend.log
+mv localhost.conf /etc/nginx/default.d/roboshop.conf &>> $LOGFILE
 stat $?
 
 echo -n -e "\e[32m starting nginx \e[0m:"
