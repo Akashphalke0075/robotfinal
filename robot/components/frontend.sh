@@ -31,7 +31,7 @@ cd /usr/share/nginx/html
 stat $?
 
 echo -n -e "\e[32m unzipping component \e[0m:"
-unzip /tmp/frontend.zip &>> /tmp/frotnend.log
+unzip /tmp/fronten.zip &>> /tmp/frotnend.log
 stat $?
 
 echo -n -e "\e[32m moving the component \e[0m:"
