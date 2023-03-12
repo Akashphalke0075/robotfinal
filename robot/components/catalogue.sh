@@ -36,5 +36,5 @@ npm install  &>> $LOGFILE
 stat $?
 
 echo -n -e "\e[32m chaning permmision \e[0m:"
-chown $APPUSER:$APPUSER /home/roboshop/$COMPONENT
+chown -R $APPUSER:$APPUSER /home/roboshop/$COMPONENT
 stat $?
