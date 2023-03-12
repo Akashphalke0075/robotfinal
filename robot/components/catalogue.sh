@@ -40,7 +40,7 @@ chown -R $APPUSER:$APPUSER /home/roboshop/$COMPONENT &>> $LOGFILE
 stat $?
 
 echo -n "configuring service name:"
-sed -e -i 's/MONGO_DNSNAME/mongodb.robot.internal/' /home/$APPUSER/$COMPONENT/systemd.service &>> $LOGFILE
+sed -i -e 's/MONGO_DNSNAME/mongodb.robot.internal/' /home/$APPUSER/$COMPONENT/systemd.service &>> $LOGFILE
 mv /home/$APPUSER/$COMPONENT/systemd.service /etc/systemd/system/$COMPONENT.service
 stat $?
 
