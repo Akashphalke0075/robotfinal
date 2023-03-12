@@ -1,14 +1,14 @@
 frontend:
-	bash components/frotnend.sh
+	bash components/frontend.sh
 
-mongodb:
-	bash components/mongodb.sh
+# mongodb:
+# 	bash components/mongodb.sh
 
-catalogue:
-	bash components/catalogue.sh
+# catalogue:
+# 	bash components/catalogue.sh
 
-cart:
-	bash components/cart.sh
+# cart:
+# 	bash components/cart.sh
 
-user:
-	bash components/user.sh
+# user:
+# 	bash components/user.sh
