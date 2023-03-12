@@ -15,7 +15,7 @@ stat $?
 id $APPUSER  &>> $LOGFILE
 if [ $? -ne 0 ]; then
 echo -n -e "\e[32m adding user roboshop \e[0m:"
-useradd $APPUSER
+useradd $APPUSER &>> $LOGFILE
 stat $?
 fi
 
@@ -26,6 +26,7 @@ stat $?
 echo -n -e "\e[32m unzipping moving components \e[0m:"
 cd /home/$APPUSER
 unzip -o /tmp/$COMPONENT.zip  &>> $LOGFILE
+rm -rf $COMPONENT
 mv $COMPONENT-main $COMPONENT
 cd /home/$APPUSER/$COMPONENT
 stat $?
