@@ -14,7 +14,7 @@ stat $?
 
 echo -n -e "\e[32m cleaning up \e[0m:"
 rm -rf /usr/share/nginx/html/*
-cd /usr/share/nginx/html
+cd /usr/shar/nginx/html
 stat $?
 
 echo -n -e "\e[32m unzipping component \e[0m:"
