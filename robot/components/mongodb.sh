@@ -13,10 +13,25 @@ yum install -y $COMPONENT-org  &>> $LOGFILE
 stat $?
 
 echo -n -e "\e[32m open the ip address \e[0m:"
-sed -i 's/127.0.0.1/0.0.0.0/' /etc/mongod.conf
+sed -i 's/127.0.0.1/0.0.0.0/' /etc/mongod.conf 
 stat $?
 
 echo -n -e "\e[32m starting mongodb \e[0m:"
-systemctl enable mongod
-systemctl start mongod
+systemctl enable mongod &>> $LOGFILE
+systemctl start mongod &>> $LOGFILE
+stat $?
+
+echo -n -e "\e[32m downloading componenets \e[0m:"
+curl -s -L -o /tmp/mongodb.zip "https://github.com/stans-robot-project/mongodb/archive/main.zip"  &>> $LOGFILE
+stat $?
+
+echo -n -e "\e[32m unzipping componenets \e[0m:"
+cd /tmp
+unzip mongodb.zip &>> $LOGFILE
+stat $?
+
+echo -n -e "\e[32m injecting schema \e[0m:"
+cd mongodb-main
+mongo < catalogue.js  &>> $LOGFILE
+mongo < users.js  &>> $LOGFILE
 stat $?
