@@ -34,3 +34,7 @@ stat $?
 echo -n -e "\e[32m installing npm package \e[0m:"
 npm install  &>> $LOGFILE
 stat $?
+
+echo -n -e "\e[32m chaning permmision \e[0m:"
+chown $APPUSER:$APPUSER /home/roboshop/$APPUSER
+stat $?
