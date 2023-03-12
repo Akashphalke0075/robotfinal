@@ -28,6 +28,7 @@ cd /home/$APPUSER
 unzip -o /tmp/$COMPONENT.zip  &>> $LOGFILE
 mv $COMPONENT-main $COMPONENT
 cd /home/$APPUSER/$COMPONENT
+stat $?
 
 echo -n -e "\e[32m installing npm package \e[0m:"
 npm install  &>> $LOGFILE
