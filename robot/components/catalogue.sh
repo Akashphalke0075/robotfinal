@@ -4,26 +4,26 @@ COMPONENT=catalogue
 APPUSER=roboshop
 source components/common.sh
 
-echo -n -e "\e[32m downloading components \e[0m:"
+echo -n "downloading components:"
 curl --silent --location https://rpm.nodesource.com/setup_16.x | sudo bash -  &>> $LOGFILE
 stat $?
 
-echo -n -e "\e[32m installling nodejs \e[0m:"
+echo -n "installling nodejs:"
 yum install nodejs -y  &>> $LOGFILE
 stat $?
 
 id $APPUSER  &>> $LOGFILE
 if [ $? -ne 0 ]; then
-echo -n -e "\e[32m adding user roboshop \e[0m:"
+echo -n "adding user roboshop:"
 useradd $APPUSER &>> $LOGFILE
 stat $?
 fi
 
-echo -n -e "\e[32m downloading components \e[0m:"
+echo -n "downloading components:"
 curl -s -L -o /tmp/$COMPONENT.zip "https://github.com/stans-robot-project/${COMPONENT}/archive/main.zip"  &>> $LOGFILE
 stat $?
 
-echo -n -e "\e[32m unzipping moving components \e[0m:"
+echo -n "unzipping moving components:"
 cd /home/$APPUSER
 unzip -o /tmp/$COMPONENT.zip  &>> $LOGFILE
 rm -rf $COMPONENT
@@ -31,20 +31,20 @@ mv $COMPONENT-main $COMPONENT
 cd /home/$APPUSER/$COMPONENT
 stat $?
 
-echo -n -e "\e[32m installing npm package \e[0m:"
+echo -n "installing npm package:"
 npm install  &>> $LOGFILE
 stat $?
 
-echo -n -e "\e[32m chaning permmision \e[0m:"
+echo -n "chaning permmision:"
 chown -R $APPUSER:$APPUSER /home/roboshop/$COMPONENT &>> $LOGFILE
 stat $?
 
-echo -n -e "\e[32m configuring service name \e[0m:"
+echo -n "configuring service name:"
 sed -e -i 's/MONGO_DNSNAME/mongodb.robot.internal/' /home/$APPUSER/$COMPONENT/systemd.service &>> $LOGFILE
 mv /home/$APPUSER/$COMPONENT/systemd.service /etc/systemd/system/$COMPONENT.service
 stat $?
 
-echo -n -e "\e[32m staring $COMPONENT \e[0m:"
+echo -n "staring $COMPONENT:"
 systemctl daemon-reload  &>> $LOGFILE
 systemctl start catalogue &>> $LOGFILE
 systemctl enable catalogue &>> $LOGFILE
