@@ -36,5 +36,16 @@ npm install  &>> $LOGFILE
 stat $?
 
 echo -n -e "\e[32m chaning permmision \e[0m:"
-chown -R $APPUSER:$APPUSER /home/roboshop/$COMPONENT
+chown -R $APPUSER:$APPUSER /home/roboshop/$COMPONENT &>> $LOGFILE
+stat $?
+
+echo -n -e "\e[32m configuring service name \e[0m:"
+sed -e -i 's/MONGO_DNSNAME/mongodb.robot.internal/' /home/$APPUSER/$COMPONENT/systemd.service &>> $LOGFILE
+mv /home/$APPUSER/$COMPONENT/systemd.service /etc/systemd/system/$COMPONENT.service
+stat $?
+
+echo -n -e "\e[32m staring $COMPONENT \e[0m:"
+systemctl daemon-reload  &>> $LOGFILE
+systemctl start catalogue &>> $LOGFILE
+systemctl enable catalogue &>> $LOGFILE
 stat $?
