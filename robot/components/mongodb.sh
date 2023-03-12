@@ -14,7 +14,9 @@ stat $?
 
 echo -n -e "\e[32m open the ip address \e[0m:"
 sed -i 's/127.0.0.1/0.0.0.0/' /etc/mongod.conf
+stat $?
 
 echo -n -e "\e[32m starting mongodb \e[0m:"
 systemctl enable mongod
 systemctl start mongod
+stat $?
