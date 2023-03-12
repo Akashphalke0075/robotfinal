@@ -11,7 +11,7 @@ fi
 
 stat() {
 if [ $1 -eq 0 ] ; then
-echo -e "\e[31m success \e[0m"
+echo -e "\e[32m success \e[0m"
 else
 echo -e "\e[32m failure \e[0m"
 fi
@@ -37,6 +37,8 @@ stat $?
 echo -n -e "\e[32m moving the component \e[0m:"
 mv frontend-main/* .
 mv static/* .
+
+echo -n -e "\e[32m cleaning and move confg \e[0m:"
 rm -rf frontend-main README.md
 mv localhost.conf /etc/nginx/default.d/roboshop.conf &>> /tmp/frotnend.log
 stat $?
