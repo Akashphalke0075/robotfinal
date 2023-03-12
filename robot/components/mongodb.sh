@@ -27,7 +27,7 @@ stat $?
 
 echo -n -e "\e[32m unzipping componenets \e[0m:"
 cd /tmp
-unzip $COMPONENT.zip &>> $LOGFILE
+unzip -o $COMPONENT.zip &>> $LOGFILE
 stat $?
 
 echo -n -e "\e[32m injecting schema \e[0m:"
