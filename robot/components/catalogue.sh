@@ -49,3 +49,5 @@ systemctl daemon-reload  &>> $LOGFILE
 systemctl start catalogue &>> $LOGFILE
 systemctl enable catalogue &>> $LOGFILE
 stat $?
+
+echo -n "_____installation completed________"
