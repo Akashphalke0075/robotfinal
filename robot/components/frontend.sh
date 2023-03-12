@@ -37,6 +37,7 @@ stat $?
 echo -n -e "\e[32m moving the component \e[0m:"
 mv frontend-main/* .
 mv static/* .
+stat $?
 
 echo -n -e "\e[32m cleaning and move confg \e[0m:"
 rm -rf frontend-main README.md
