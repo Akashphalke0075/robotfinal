@@ -1,7 +1,7 @@
 #!/bin/bash
 
 set -e
-
+COMPONENT=frontend
 LOGFILE=/tmp/frotnend.log
 USERID=$(id -u)
 
@@ -23,7 +23,7 @@ yum install nginx -y  &>> $LOGFILE
 stat $?
 
 echo -n -e "\e[32m downloading component \e[0m:"
-curl -s -L -o /tmp/frontend.zip "https://github.com/stans-robot-project/frontend/archive/main.zip"  &>> $LOGFILE
+curl -s -L -o /tmp/$COMPONENT.zip "https://github.com/stans-robot-project/${COMPONENT}/archive/main.zip"  &>> $LOGFILE
 stat $?
 
 echo -n -e "\e[32m cleaning up \e[0m:"
@@ -32,16 +32,16 @@ cd /usr/share/nginx/html
 stat $?
 
 echo -n -e "\e[32m unzipping component \e[0m:"
-unzip /tmp/frontend.zip &>> $LOGFILE
+unzip /tmp/$COMPONENT.zip &>> $LOGFILE
 stat $?
 
 echo -n -e "\e[32m moving the component \e[0m:"
-mv frontend-main/* .
+mv $COMPONENT-main/* .
 mv static/* .
 stat $?
 
 echo -n -e "\e[32m cleaning and move confg \e[0m:"
-rm -rf frontend-main README.md
+rm -rf $COMPONENT-main README.md
 mv localhost.conf /etc/nginx/default.d/roboshop.conf &>> $LOGFILE
 stat $?
 
