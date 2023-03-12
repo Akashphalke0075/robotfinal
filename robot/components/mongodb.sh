@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# set -e
+set -e
 COMPONENT=mongodb
 source components/common.sh
 
