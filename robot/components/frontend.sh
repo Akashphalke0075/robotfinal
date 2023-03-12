@@ -32,6 +32,6 @@ mv localhost.conf /etc/nginx/default.d/roboshop.conf &>> $LOGFILE
 stat $?
 
 echo -n -e "\e[32m starting nginx \e[0m:"
-systemctl enable nginx
-systemctl start nginx
+systemctl enable nginx &>> $LOGFILE
+systemctl start nginx &>> $LOGFILE
 stat $?
