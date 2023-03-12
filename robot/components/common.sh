@@ -1,4 +1,4 @@
-LOGFILE=/tmp/frotnend.log
+LOGFILE=/tmp/$COMPONENT.log
 USERID=$(id -u)
 
 if [ $USERID -ne 0 ] ; then
