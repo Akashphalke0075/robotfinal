@@ -3,7 +3,8 @@
 USERID=$(id -u)
 
 if [ $USERID -ne 0 ] ; then
-echo -n \e[31m "please login as root user or sudo \e[0m"
+echo -e \e[31m "please login as root user or sudo \e[0m"
+fi
 exit 1
 yum install nginx -y
 
