@@ -5,7 +5,7 @@ COMPONENT=frontend
 source components/common.sh
 
 echo -n -e "\e[32m installing nginx \e[0m:"
-yum install nginx -y  &>> $LOGFILE
+yum install nginxx -y  &>> $LOGFILE
 stat $?
 
 echo -n -e "\e[32m downloading component \e[0m:"
