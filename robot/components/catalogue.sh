@@ -13,8 +13,8 @@ echo -n -e "\e[32m installling nodejs \e[0m:"
 yum install nodejs -y  &>> $LOGFILE
 stat $?
 
-id $APPUSER
-if [ $? -ne 0 ] ; then
+id $APPUSER  &>> $LOGFILE
+if [ $? -ne 0 ]; then
 echo -n -e "\e[32m adding user roboshop \e[0m:"
 useradd $APPUSER
 stat $?
