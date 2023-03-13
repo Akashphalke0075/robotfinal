@@ -18,6 +18,6 @@ stat $?
 
 echo -n " starting redis :"
 systemctl daemon-reload  &>> $LOGFILE
-systemctl enable redis  &>> $LOGFILE
+# systemctl enable redis  &>> $LOGFILE
 systemctl start redis   &>> $LOGFILE
 $?
