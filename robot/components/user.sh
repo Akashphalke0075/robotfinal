@@ -46,8 +46,8 @@ stat $?
 
 echo -n "staring $COMPONENT:"
 systemctl daemon-reload  &>> $LOGFILE
-systemctl start catalogue &>> $LOGFILE
 systemctl enable catalogue &>> $LOGFILE
+systemctl start catalogue &>> $LOGFILE
 stat $?
 
 echo -n "_____installation completed________"
