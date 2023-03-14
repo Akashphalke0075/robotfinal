@@ -96,7 +96,7 @@ stat $?
 MVM_INSTALL() {
    echo -n "installing dependencies:" 
 cd $COMPONENT
-mvn clean package 
-mv target/$COMPONENT-1.0.jar $COMPONENT.jar
+mvn clean package  &>> $LOGFILE
+mv target/$COMPONENT-1.0.jar $COMPONENT.jar  &>> $LOGFILE
 stat $?
 }
