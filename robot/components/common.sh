@@ -42,6 +42,21 @@ stat $?
 fi
 }
 
+MAVEN() {
+    echo -n "installing maven;"
+    yum install maven -y  &>> $LOGFILE
+    stat $?
+
+    CREATE_USER
+
+    DOWNLOAD_EXTARCT
+
+    MVM_INSTALL
+
+    CONFIGURE_SERVICE
+
+}
+
 DOWNLOAD_EXTARCT(){
 echo -n "downloading components:"
 curl -s -L -o /tmp/$COMPONENT.zip "https://github.com/stans-robot-project/${COMPONENT}/archive/main.zip"  &>> $LOGFILE
@@ -67,7 +82,7 @@ stat $?
 
 CONFIGURE_SERVICE() {
 echo -n "configuring service name:"
-sed -i -e 's/MONGO_DNSNAME/mongodb.robot.internal/' -e 's/MONGO_ENDPOINT/mongodb.robot.internal/'  -e 's/REDIS_ENDPOINT/redis.robot.internal/' -e 's/REDIS_ENDPOINT/redis.robot.internal/' -e 's/CATALOGUE_ENDPOINT/catalogue.robot.internal/'    /home/roboshop/$COMPONENT/systemd.service
+sed -i -e 's/MONGO_DNSNAME/mongodb.robot.internal/' -e 's/MONGO_ENDPOINT/mongodb.robot.internal/'  -e 's/REDIS_ENDPOINT/redis.robot.internal/' -e 's/REDIS_ENDPOINT/redis.robot.internal/' -e 's/CATALOGUE_ENDPOINT/catalogue.robot.internal/'   -e 's/CART_ENDPOINT/cart.robot.internal/'  -e 's/DBHOST/mysql.robot.internal/'  /home/roboshop/$COMPONENT/systemd.service
 mv /home/$APPUSER/$COMPONENT/systemd.service /etc/systemd/system/$COMPONENT.service
 stat $?
 
@@ -75,5 +90,13 @@ echo -n "staring $COMPONENT:"
 systemctl daemon-reload  &>> $LOGFILE
 systemctl start $COMPONENT &>> $LOGFILE
 systemctl enable $COMPONENT &>> $LOGFILE
+stat $?
+}
+
+MVM_INSTALL() {
+   echo -n "installing dependencies:" 
+cd $COMPONENT
+mvn clean package 
+mv target/$COMPONENT-1.0.jar $COMPONENT.jar
 stat $?
 }
