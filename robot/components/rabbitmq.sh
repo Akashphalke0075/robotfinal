@@ -19,19 +19,21 @@ systemctl enable rabbitmq-server &>> $LOGFILE
 systemctl start rabbitmq-server &>> $LOGFILE 
 stat $?
 
+rabbitmqctl list_users | grep roboshop &>> $LOGFILE
 
+if [ $? -ne 0 ]; then
 echo -n "creating application user:"
-rabbitmqctl add_user roboshop roboshop123
-# rabbitmqctl set_user_tags roboshop administrator
-# rabbitmqctl set_permissions -p / roboshop ".*" ".*" ".*"
+rabbitmqctl add_user roboshop roboshop123   
+stat $?
+fi
+
+echo -n "adding tags and permisson:"
+rabbitmqctl set_user_tags roboshop administrator    &>> $LOGFILE
+rabbitmqctl set_permissions -p / roboshop ".*" ".*" ".*"   &>> $LOGFILE
+stat $?
 
 
-
-
-
-
-
-
+echo -n "_____installation completed________"
 
 
 
