@@ -1,21 +1,21 @@
-#!/bin/bash
+#!/bin/bash 
 
 COMPONENT=mysql
+
 source components/common.sh
 
-read -p 'enter my sql password:' MYSQL_PWD
+read -p 'Enter MySQL Password you wish to configure:' MYSQL_PWD
 
-echo -n "downloading component:"
-curl -s -L -o /etc/yum.repos.d/mysql.repo https://raw.githubusercontent.com/stans-robot-project/mysql/main/mysql.repo   &>> $LOGFILE
-stat $?
+echo -n "Configuring the $COMPONENT Repo:"
+curl -s -L -o /etc/yum.repos.d/mysql.repo https://raw.githubusercontent.com/stans-robot-project/mysql/main/mysql.repo &>> $LOGFILE 
+stat $? 
 
-echo -n "installing mysql:"
-yum install mysql-community-server -y   &>> $LOGFILE
-stat $?
+echo -n "Installing $COMPONENT:"
+yum install mysql-community-server -y &>> $LOGFILE 
+stat $? 
 
-echo -n "starting mysql:"
-systemctl enable mysqld  &>> $LOGFILE
-systemctl start mysqld  &>> $LOGFILE
+echo -n "Starting $COMPONENT service: "
+systemctl enable mysqld && systemctl start mysqld
 stat $?
 
 echo -n "Changing the default password:"
@@ -29,7 +29,6 @@ if [ $? -ne 0 ] ; then
     echo "ALTER USER 'root'@'localhost' IDENTIFIED BY '${MYSQL_PWD}';" | mysql  --connect-expired-password  -uroot -p"${DEF_ROOT_PASSWORD}" &>> $LOGFILE 
     stat $? 
 fi 
-
 
 echo show plugins | mysql -uroot -p${MYSQL_PWD} | grep validate_password; &>> $LOGFILE 
 if [ $? -eq 0 ] ; then 
