@@ -7,7 +7,7 @@ source components/common.sh
 echo -n "downloading components:"
 curl -s https://packagecloud.io/install/repositories/rabbitmq/erlang/script.rpm.sh | sudo bash   &>> $LOGFILE 
 curl -s https://packagecloud.io/install/repositories/rabbitmq/rabbitmq-server/script.rpm.sh | sudo bash   &>> $LOGFILE 
-stat 4?
+stat $?
 
 
 echo -n "installing rabbitmq:"
