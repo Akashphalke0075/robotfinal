@@ -31,7 +31,16 @@ rm -rf $COMPONENT-main README.md
 mv localhost.conf /etc/nginx/default.d/roboshop.conf &>> $LOGFILE
 stat $?
 
+
+for component in catalogue cart user shipping payment; do
+echo -n "proxy reverse proxy:"
+sed -i -e "/$component/s/localhost/$component.robot.internal/" /etc/nginx/default.d/roboshop.conf
+stat $? 
+done
+
+
 echo -n -e "\e[32m starting nginx \e[0m:"
+systemctl daemon-reload
 systemctl enable nginx &>> $LOGFILE
-systemctl start nginx &>> $LOGFILE
+systemctl restart nginx &>> $LOGFILE
 stat $?
