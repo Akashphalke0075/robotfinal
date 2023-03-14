@@ -25,13 +25,13 @@ stat $?
 echo show databases | mysql -uroot -p${MYSQL_PWD}  &>> $LOGFILE
 if [ $? -ne 0 ]; then
 echo -n "reset root password"
-echo "ALTER USER 'root'@'localhost' IDENTIFIED BY '${MYSQL_PWD}';" | mysql   --connect-expired-password -uroot -p"{DEF_ROOT_PASSWORD}" &>> $LOGFILE
+echo "ALTER USER 'root'@'localhost' IDENTIFIED BY '${MYSQL_PWD}';" | mysql  --connect-expired-password -uroot -p"${DEF_ROOT_PASSWORD}" &>> $LOGFILE
 stat $?
 fi
 
 echo show plugins | mysql -uroot p${MYSQL_PWD} | grep validate_password; &>> $LOGFILE
 if [ $? -eq 0 ]; then
 echo -n "uninstalling password validate plugin"
-echo "uninstall plugin validate_password;" | mysql   --connect-expired-password -uroot -p${MYSQL_PWD} &>> $LOGFILE
+echo "uninstall plugin validate_password;" | mysql --connect-expired-password -uroot -p${MYSQL_PWD} &>> $LOGFILE
 stat $?
 fi
