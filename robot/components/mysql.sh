@@ -20,7 +20,7 @@ stat $?
 
 echo -n "temporary pssword:"
 DEF_ROOT_PASSWORD=$(grep 'A temporary password' /var/log/mysqld.log | awk -F ' ' '{print $NF}')
-
+stat $?
 
 echo show databases | mysql -uroot -p${MYSQL_PWD}  &>> $LOGFILE
 if [ $? -ne 0 ]; then
