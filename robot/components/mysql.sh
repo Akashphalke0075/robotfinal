@@ -22,7 +22,7 @@ echo -n "temporary pssword:"
 DEF_ROOT_PASSWORD=$(grep 'A temporary password' /var/log/mysqld.log | awk -F ' ' '{print $NF}')
 
 
-echo show databases | mysql -uroot p${MYSQL_PWD}  &>> $LOGFILE
+echo show databases | mysql -uroot -p${MYSQL_PWD}  &>> $LOGFILE
 if [ $? -ne 0 ]; then
 echo -n "reset root password"
 echo "ALTER USER 'root'@'localhost' IDENTIFIED BY '${MYSQL_PWD}';" | mysql   --connect-expired-password -uroot -p"{DEF_ROOT_PASSWORD}" &>> $LOGFILE
