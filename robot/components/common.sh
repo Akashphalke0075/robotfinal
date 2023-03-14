@@ -109,8 +109,8 @@ CREATE_USER
 
 DOWNLOAD_EXTARCT
 
-USERID=$(id -u -roboshop)
-GROUPID=$(id -g -roboshop)
+USERID=$(id -u roboshop)
+GROUPID=$(id -g roboshop)
 
 echo -n "installling pip3:"
 cd /home/$APPUSER/$COMPONENT/
