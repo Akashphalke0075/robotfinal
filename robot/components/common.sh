@@ -114,11 +114,11 @@ cd /home/roboshop/payment
 pip3 install -r requirements.txt  &>> $LOGFILE
 stat $?
 
-UID=$(id -u -roboshop)
-GID=$(id -g -roboshop)
+USERID=$(id -u -roboshop)
+GROUPID=$(id -g -roboshop)
 
 echo -n "updating ui and gid in paymentini:"
-sed -e "/^uid/ c uid=$UID" -e sed -e "/^gid/ c uid=$GID" $COMPONENT.ini
+sed -e "/^uid/ c uid=$USERID" -e sed -e "/^gid/ c gid=$GROUPID" $COMPONENT.ini
 stat $?
 
 CONFIGURE_SERVICE
