@@ -18,9 +18,8 @@ systemctl enable mysqld  &>> $LOGFILE
 systemctl start mysqld  &>> $LOGFILE
 stat $?
 
-echo -n "temporary pssword:"
+echo -n "Changing the default password:"
 DEF_ROOT_PASSWORD=$(grep 'A temporary password' /var/log/mysqld.log | awk -F ' ' '{print $NF}')
-stat $?
 
 # I only want to change the default password only for the first time.
 # How do I come to know whether the password is changed or not.
