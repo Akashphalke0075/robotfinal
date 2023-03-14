@@ -100,3 +100,17 @@ mvn clean package  &>> $LOGFILE
 mv target/$COMPONENT-1.0.jar $COMPONENT.jar  &>> $LOGFILE
 stat $?
 }
+
+PYTHON() {
+echo -n "installling python:"
+yum install python36 gcc python3-devel -y  &>> $LOGFILE
+
+CREATE_USER
+
+DOWNLOAD_EXTARCT
+
+
+
+
+
+}
