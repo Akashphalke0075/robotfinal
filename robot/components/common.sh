@@ -82,7 +82,7 @@ stat $?
 
 CONFIGURE_SERVICE() {
 echo -n "configuring service name:"
-sed -i -e 's/MONGO_DNSNAME/mongodb.robot.internal/' -e 's/MONGO_ENDPOINT/mongodb.robot.internal/'  -e 's/REDIS_ENDPOINT/redis.robot.internal/' -e 's/REDIS_ENDPOINT/redis.robot.internal/' -e 's/CATALOGUE_ENDPOINT/catalogue.robot.internal/'   -e 's/CART_ENDPOINT/cart.robot.internal/'  -e 's/DBHOST/mysql.robot.internal/'  /home/roboshop/$COMPONENT/systemd.service
+sed -i -e 's/MONGO_DNSNAME/mongodb.robot.internal/' -e 's/MONGO_ENDPOINT/mongodb.robot.internal/'  -e 's/REDIS_ENDPOINT/redis.robot.internal/' -e 's/REDIS_ENDPOINT/redis.robot.internal/' -e 's/CATALOGUE_ENDPOINT/catalogue.robot.internal/'   -e 's/CART_ENDPOINT/cart.robot.internal/'  -e 's/DBHOST/mysql.robot.internal/' -e 's/CARTHOST/cart.robot.internal/' -e 's/USERHOST/user.robot.internal/'  -e 's/AMQPHOST/rabbitmq.robot.internal/'        /home/roboshop/$COMPONENT/systemd.service
 mv /home/$APPUSER/$COMPONENT/systemd.service /etc/systemd/system/$COMPONENT.service
 stat $?
 
@@ -109,8 +109,18 @@ CREATE_USER
 
 DOWNLOAD_EXTARCT
 
+echo -n "installling pip3:"
+cd /home/roboshop/payment 
+pip3 install -r requirements.txt  &>> $LOGFILE
+stat $?
 
+UID=$(id -u -roboshop)
+GID=$(id -g -roboshop)
 
+echo -n "updating ui and gid in paymentini:"
+sed -e "/^uid/ c uid=$UID" -e sed -e "/^gid/ c uid=$GID" $COMPONENT.ini
+stat $?
 
+CONFIGURE_SERVICE
 
 }
