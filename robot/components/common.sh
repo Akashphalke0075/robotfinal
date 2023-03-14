@@ -109,13 +109,14 @@ CREATE_USER
 
 DOWNLOAD_EXTARCT
 
+USERID=$(id -u -roboshop)
+GROUPID=$(id -g -roboshop)
+
 echo -n "installling pip3:"
-cd /home/roboshop/payment 
+cd /home/$APPUSER/$COMPONENT/
 pip3 install -r requirements.txt  &>> $LOGFILE
 stat $?
 
-USERID=$(id -u -roboshop)
-GROUPID=$(id -g -roboshop)
 
 echo -n "updating ui and gid in paymentini:"
 sed -i -e "/^uid/ c uid=$USERID" -e "/^gid/ c gid=$GROUPID" $COMPONENT.ini
