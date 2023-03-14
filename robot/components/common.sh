@@ -118,7 +118,7 @@ USERID=$(id -u -roboshop)
 GROUPID=$(id -g -roboshop)
 
 echo -n "updating ui and gid in paymentini:"
-sed -e "/^uid/ c uid=$USERID" -e sed -e "/^gid/ c gid=$GROUPID" $COMPONENT.ini
+sed -i -e "/^uid/ c uid=$USERID" -e "/^gid/ c gid=$GROUPID" $COMPONENT.ini
 stat $?
 
 CONFIGURE_SERVICE
